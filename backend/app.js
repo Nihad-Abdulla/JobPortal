@@ -7,7 +7,7 @@ import userRouter from './routes/userRouter.js';
 import applicationRouter from './routes/applicationRouter.js';
 import jobRouter from './routes/jobRouter.js';
 import {dbConnection} from './database/dbConnection.js';
-
+import { errorMiddleware } from './middlewares/error.js';
 
 const app = express();
 dotenv.config({path: "./confiq/confiq.env"});
@@ -38,5 +38,8 @@ app.use('/api/v1/job',jobRouter);
 
 //mongodb connection
 dbConnection();
+
+//error handler middleware
+app.use(errorMiddleware);
 
 export default app;
